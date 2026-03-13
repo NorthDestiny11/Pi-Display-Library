@@ -1,8 +1,0 @@
-sudo apt update
-sudo apt upgrade
-sudo apt install python3-gpiozero
-git clone https://github.com/NorthDestiny11/Pi-Display-Library.git
-
-sudo raspi-config
-  - Enable 12C and SPI
-
