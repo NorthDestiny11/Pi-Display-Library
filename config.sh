@@ -18,7 +18,7 @@ echo "All required interfaces have been enabled. Would you like to reboot now?"
 
 # Rebooting script for changes to take effect
 read -p "Would you like to reboot now? (Y/N): " answer
-answer=${answer,,}
+answer=$(echo "$answer" | tr '[:upper:]' '[:lower:]')
 
 if [[ "$answer" == "y" || "$answer" == "yes" ]]; then
     echo "Rebooting..."
