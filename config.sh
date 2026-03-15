@@ -26,6 +26,16 @@ sudo apt install libgpiod-dev
 # Enable SPI
 sudo raspi-config nonint do_spi 0
 
+# Compile the C++ file
+echo "Compiling C++ Driver..."
+g++ -o Northian-Display-Driver ./main.cpp -lgpiod -static -lpthread
+
+# Copy just-compiled file to /usr/local/bin to be stored safely and permanently
+sudo cp -f ./Northian-Display-Driver /usr/local/bin
+
+# Copy the auto-run .service file to a safe, permanent space to run on boot. 
+sudo cp -f ./Northian-Display-Library.service /etc/systemd/system
+
 echo "All required interfaces have been enabled. Would you like to reboot now?"
 
 # Rebooting script for changes to take effect
@@ -40,4 +50,3 @@ if [[ "$answer" == "y" ]]; then
 else
     echo "Reboot skipped. Changes will take effect on next boot."
 fi
-

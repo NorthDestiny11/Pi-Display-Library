@@ -1,0 +1,11 @@
+[Unit]
+Description=The most awesome-est display library for the ILI9341 varients of TFT Touchscreen Displays for the Raspbery Pi 5.
+
+[Service]
+ExecStart=/usr/local/bin/Northian-Display-Driver
+Restart=always
+User=root
+WorkingDirectory=/usr/local/bin
+
+[Install]
+WantedBy=multi-user.target

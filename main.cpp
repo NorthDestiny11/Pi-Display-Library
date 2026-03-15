@@ -18,7 +18,7 @@
 #include <chrono>   // Time Utilities
 #include <thread>   // For Pausing/Sleeping Purposes
 
-#include <pigpio.h>
+#include <gpiod.h>
 
 int main(int argc, char *argv[])
 {
