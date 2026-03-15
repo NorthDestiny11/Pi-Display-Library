@@ -19,9 +19,9 @@ sudo apt upgrade
 sudo apt install build-essential
 
 # Download and enable pigpio
-sudo apt install pigpio
-sudo systemctl start pigpiod
-sudo systemctl enable pigpiod
+
+# This library does not function or exist on the Pi 5.
+sudo apt install libgpiod2 libgpiod-dev
 
 # Enable SPI
 sudo raspi-config nonint do_spi 0
