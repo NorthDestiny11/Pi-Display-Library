@@ -1,10 +1,12 @@
 #!/bin/bash
 
-# Fail if any commands or parts fail or if any variables are undefined
-set -euo pipefail
 #
 # This file is designed to configure the Raspberry Pi
+# Library designed by NorthDestiny11
 #
+
+# Fail if any commands or parts fail or if any variables are undefined
+set -euo pipefail
 
 # Make sure script is run as root:
 if [[ $EUID -ne 0 ]]; then
@@ -18,34 +20,24 @@ sudo apt upgrade
 # Install GCC if not installed already
 sudo apt install build-essential
 
-# Download and enable pigpio
-
-# This library does not function or exist on the Pi 5.
-sudo apt install wget make
-wget https://mirrors.edge.kernel.org/pub/software/libs/libgpiod/libgpiod-x.y.z.tar.xz
-tar -xvf ./libgpiod-x.y.z.tar.xz
-cd ./libgpiod-x.y.z/
-./configure --enable-tools
-make
-sudo make install
-
-ls
+# Download libgpiod for proper processing from the GPIO header
+sudo apt install libgpiod-dev
 
 # Enable SPI
-# sudo raspi-config nonint do_spi 0
+sudo raspi-config nonint do_spi 0
 
 echo "All required interfaces have been enabled. Would you like to reboot now?"
 
 # Rebooting script for changes to take effect
-#read -p "Would you like to reboot now? (y/N): " answer
-#answer=$(echo "$answer" | tr '[:upper:]' '[:lower:]')
+read -p "Would you like to reboot now? (y/N): " answer
+answer=$(echo "$answer" | tr '[:upper:]' '[:lower:]')
 
-#if [[ "$answer" == "y" ]]; then
-#    echo "Rebooting..."
-#    echo "Don't forget to drink water today."
-#    sleep 3
-#    sudo reboot
-#else
-#    echo "Reboot skipped. Changes will take effect on next boot."
-#fi
+if [[ "$answer" == "y" ]]; then
+    echo "Rebooting..."
+    echo "Don't forget to drink water today."
+    sleep 3
+    sudo reboot
+else
+    echo "Reboot skipped. Changes will take effect on next boot."
+fi
 
