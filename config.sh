@@ -10,14 +10,24 @@ if [[ $EUID -ne 0 ]]; then
   exit 1
 fi
 
+sudo apt update
+sudo apt upgrade
+
+# Install GCC if not installed already
+sudo apt insteall build-essential
+
+# Download and enable pigpio
+sudo apt install pigpio
+sudo systemctl start pigpiod
+sudo systemctl enable pigpiod
+
 # Enable SPI, I2C, UART respectively
 sudo raspi-config nonint do_spi 0
-sudo raspi-config nonint do_i2c 0
 
 echo "All required interfaces have been enabled. Would you like to reboot now?"
 
 # Rebooting script for changes to take effect
-read -p "Would you like to reboot now? (Y/N): " answer
+read -p "Would you like to reboot now? (y/N): " answer
 answer=$(echo "$answer" | tr '[:upper:]' '[:lower:]')
 
 if [[ "$answer" == "y" || "$answer" == "yes" ]]; then
