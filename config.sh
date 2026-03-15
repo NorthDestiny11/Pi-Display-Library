@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Fail if any commands or parts fail or if any variables are undefined
+set -euo pipefail
 #
 # This file is designed to configure the Raspberry Pi
 #
@@ -14,14 +16,14 @@ sudo apt update
 sudo apt upgrade
 
 # Install GCC if not installed already
-sudo apt insteall build-essential
+sudo apt install build-essential
 
 # Download and enable pigpio
 sudo apt install pigpio
 sudo systemctl start pigpiod
 sudo systemctl enable pigpiod
 
-# Enable SPI, I2C, UART respectively
+# Enable SPI
 sudo raspi-config nonint do_spi 0
 
 echo "All required interfaces have been enabled. Would you like to reboot now?"
@@ -30,9 +32,12 @@ echo "All required interfaces have been enabled. Would you like to reboot now?"
 read -p "Would you like to reboot now? (y/N): " answer
 answer=$(echo "$answer" | tr '[:upper:]' '[:lower:]')
 
-if [[ "$answer" == "y" || "$answer" == "yes" ]]; then
+if [[ "$answer" == "y" ]]; then
     echo "Rebooting..."
+    echo "Don't forget to drink water today."
+    sleep 3
     sudo reboot
 else
     echo "Reboot skipped. Changes will take effect on next boot."
 fi
+
