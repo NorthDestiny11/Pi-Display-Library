@@ -33,10 +33,22 @@ echo "Compiling C++ Driver..."
 
 
 # Copy the auto-run .service file to a safe, permanent space to run on boot. 
-sudo cp -f ./Northian-Display-Library.service /etc/systemd/system
+
+#
+#
+#   DO NOT RUN THE FOLLOWING LINES OF CODE UNTIL A STABLE RELEASE HAS BEEN PUBLISHED
+#
+#
+
+: '
+
+#sudo cp -f Northian-Display-Library.service /etc/systemd/system
 
 # Compile file to /usr/local/bin to be stored safely and permanently
-sudo g++ -o /usr/local/bin/Northian-Display-Driver "$HOME"/Pi-TFT-Driver/main.cpp -lgpiod -lpthread --pedantic
+#sudo g++ -o /usr/local/bin/Northian-Display-Driver "$HOME"/Pi-TFT-Driver/main.cpp -lgpiod -lpthread --pedantic
+
+'
+
 
 echo "All required interfaces have been enabled. Would you like to reboot now?"
 
